@@ -10,13 +10,16 @@ pub fn parse<'a>(args: &'a Vec<String>)->Result<Config<'a>, String>{
             config.set_file_path(&next_val);
           }
         },
-        "-n" | "name" =>{
+        "-n" | "--name" =>{
           if let Some(next_val) = args_iter.next(){
             config.set_query_name(&next_val);
           }
         }
         "-s" | "--strict" =>{
           config.set_strict(true);
+        }
+        "-j" | "--json" =>{
+          config.set_json(true);
         }
         _ =>{}
     }

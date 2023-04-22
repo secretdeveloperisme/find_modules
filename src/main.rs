@@ -1,3 +1,4 @@
+
 use std::{env::args, process};
 use find_module::service;
 
@@ -11,17 +12,6 @@ fn main(){
       process::exit(-1);
     }
   };
-  let results = service::find_module(&config);
-  if let Err(err) = results {
-    eprintln!("[Error]");
-    eprintln!("There are some errors when running tool");
-    eprintln!("Cause: {err}");
-    process::exit(-1);
-  }
-  println!("[Result]");
-  for result in results.unwrap(){
-    println!("{}", result);
-  }
+  service::find_module(&config);
   process::exit(0);
-  
 }
