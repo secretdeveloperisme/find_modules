@@ -30,5 +30,20 @@ pub fn parse<'a>(args: &'a Vec<String>)->Result<Config<'a>, String>{
   else{
     Err(String::from("Can not parse the arguments"))
   }
+}
+pub fn usage(){
+  let output = String::from(r#"
+  Usage: find_module.exe [OPTION] ... 
+  Find the respective module location on the server
+
+  Mandatory arguments to long options are mandatory for short options too.
+  -i, --input                  input file or folder path
+  -n, --name                   module name
+  -s, --strict                 find module name with absolute name
+  -j, --json                   display result with json format 
+  Example:
+  find_module.exe -i data\input_win -n util --json
+  "#);
+  println!("{}", output);
   
 }
