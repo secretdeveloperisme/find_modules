@@ -7,6 +7,7 @@ pub struct Config<'a>{
   input_file_path: &'a str,
   type_of_file: TypeFile,
   is_strict: bool,
+  case_sensitive: bool,
   is_json: bool
 }
 #[derive(Debug)]
@@ -21,6 +22,7 @@ impl <'a>Config<'a>{
         query_file_name: "",
         input_file_path : "",
         is_json: false,
+        case_sensitive: false,
         type_of_file: TypeFile::INVALID,
         is_strict: false
       }
@@ -37,7 +39,7 @@ impl <'a>Config<'a>{
         self.type_of_file = TypeFile::FOLDER
       }
     }
-     pub fn delimiter(&mut self,delimiter : &'a str){
+    pub fn delimiter(&mut self,delimiter : &'a str){
       self.delimiter = delimiter;
     }
     pub fn set_query_name(&mut self,query_file : &'a str){
@@ -48,6 +50,9 @@ impl <'a>Config<'a>{
     }
     pub fn set_json(&mut self,json: bool){
       self.is_json = json;
+    }
+    pub fn set_case_sensitive(&mut self,ignore_case: bool){
+      self.case_sensitive = ignore_case;
     }
     pub fn is_ok(&self)->bool{
      if self.query_file_name.len() > 0 
@@ -68,6 +73,9 @@ impl <'a>Config<'a>{
     }
     pub fn is_json(&self)->bool{
       self.is_json
+    }
+    pub fn case_sensitive(&self)->bool{
+      self.case_sensitive
     }
     pub fn get_delimiter(&self)->&str{
       self.delimiter

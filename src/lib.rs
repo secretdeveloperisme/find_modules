@@ -9,10 +9,11 @@ pub mod service{
   pub fn find_module(config: &Config){
     let mut result = HashMap::<String,Vec<String>>::new();
     let query = escape(&config.get_query_name());
+    let ignore_case_flag = if config.case_sensitive() == false { "(?i)"} else {""};
     let reg_query = if !config.is_strict() {
-      format!("{query}.*")
+      format!("{ignore_case_flag}{query}.*")
     } else {
-      format!("{delimiter}{query}",delimiter=r"[\\/]")
+      format!("{delimiter}{ignore_case_flag}{query}",delimiter=r"[\\/]")
     };
     let file_path: &Path = Path::new(config.get_file_path());
     handle_file_recursive(&mut result,&reg_query, file_path,&handle_find_target);

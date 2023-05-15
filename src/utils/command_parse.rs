@@ -18,6 +18,9 @@ pub fn parse<'a>(args: &'a Vec<String>)->Result<Config<'a>, String>{
         "-s" | "--strict" =>{
           config.set_strict(true);
         }
+        "-c" | "--case_sensitive" =>{
+          config.set_case_sensitive(true);
+        }
         "-j" | "--json" =>{
           config.set_json(true);
         }
@@ -40,7 +43,8 @@ pub fn usage(){
   -i, --input                  input file or folder path
   -n, --name                   module name
   -s, --strict                 find module name with absolute name
-  -j, --json                   display result with json format 
+  -j, --json                   display result with json format
+  -c, --case_sensitive         search with case sensitive, default is false 
   Example:
   find_module.exe -i data\input_win -n util --json
   "#);
